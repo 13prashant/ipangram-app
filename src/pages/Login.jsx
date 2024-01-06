@@ -1,3 +1,11 @@
+import LoginForm from "../components/login/LoginForm";
+
 export default function Login() {
-  return <div>Login</div>;
+  return (
+    <main>
+      <section className="h-screen grid place-items-center">
+        <LoginForm />
+      </section>
+    </main>
+  );
 }
