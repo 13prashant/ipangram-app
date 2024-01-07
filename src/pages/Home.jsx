@@ -3,18 +3,14 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Button } from "../components/ui/button";
 
 export default function Home() {
   const {
     userData: { user },
   } = useAuthContext();
-
-  const isManager = user.role === "manager";
 
   return (
     <main>
@@ -23,7 +19,7 @@ export default function Home() {
           <Card className="w-full">
             <CardHeader>
               <CardTitle>Welcome to iPangram</CardTitle>
-              <CardDescription>Account Details</CardDescription>
+              <CardDescription>Your Account Details</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -34,17 +30,6 @@ export default function Home() {
                 Email: <strong>{user.email}</strong>
               </p>
             </CardContent>
-
-            {isManager && (
-              <CardFooter className="flex gap-4">
-                <Button className="" variant="secondary">
-                  Employees
-                </Button>
-                <Button className="" variant="secondary">
-                  Departments
-                </Button>
-              </CardFooter>
-            )}
           </Card>
         </div>
       </section>

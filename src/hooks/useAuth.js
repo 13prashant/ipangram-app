@@ -1,8 +1,8 @@
 import { useState } from "react";
 import useAuthContext from "./useAuthContext";
-import { backendApiUrl } from "..//lib/constants";
+import { backendApiUrl } from "../lib/constants";
 
-export default function useLogin() {
+export default function useAuth() {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
@@ -34,8 +34,36 @@ export default function useLogin() {
       setIsPending(false);
     } catch (error) {
       console.error("Error while logging in: ", error);
+      setError(error.message);
     }
   };
 
-  return { login, isPending, error };
+  const logout = async () => {
+    try {
+      const response = await fetch(`${backendApiUrl}/api/v1/auth/logout`, {
+        method: "GET",
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+      }
+
+      if (response.ok) {
+        if (json.success) {
+          dispatch({ type: "LOGOUT" });
+
+          localStorage.setItem("IPANGRAM_USER", null);
+        } else {
+          setError(json.error);
+        }
+      }
+    } catch (error) {
+      console.error("Error while logging out: ", error);
+      setError(error.message);
+    }
+  };
+
+  return { login, logout, isPending, error };
 }

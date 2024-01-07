@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useLogin from "../../hooks/useLogin";
+import useAuth from "../../hooks/useAuth";
 import { AlertCircle } from "lucide-react";
 import {
   Form,
@@ -24,7 +24,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { loginFormSchema } from "./helpers";
 
 export default function LoginForm() {
-  const { error, isPending, login } = useLogin();
+  const { error, isPending, login } = useAuth();
 
   const form = useForm({
     resolver: zodResolver(loginFormSchema),
@@ -69,7 +69,11 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter password" {...field} />
+                    <Input
+                      placeholder="Enter password"
+                      {...field}
+                      type="password"
+                    />
                   </FormControl>
 
                   <FormMessage />

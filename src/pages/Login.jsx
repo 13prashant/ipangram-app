@@ -15,10 +15,8 @@ export default function Login() {
   }, [navigate, userData]);
 
   return (
-    <main>
-      <section className="h-screen grid place-items-center">
-        <LoginForm />
-      </section>
-    </main>
+    <section className="h-screen grid place-items-center">
+      <LoginForm />
+    </section>
   );
 }
