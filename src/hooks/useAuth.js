@@ -38,6 +38,36 @@ export default function useAuth() {
     }
   };
 
+  const register = async (role, name, email, password) => {
+    setIsPending(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${backendApiUrl}/api/v1/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role, name, email, password }),
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+      }
+      if (response.ok) {
+        // Save the user to local storage
+        localStorage.setItem("IPANGRAM_USER", JSON.stringify(json.data));
+
+        dispatch({ type: "LOGIN", payload: json.data });
+      }
+
+      setIsPending(false);
+    } catch (error) {
+      console.error("Error while registering: ", error);
+      setError(error.message);
+    }
+  };
+
   const logout = async () => {
     try {
       const response = await fetch(`${backendApiUrl}/api/v1/auth/logout`, {
@@ -65,5 +95,5 @@ export default function useAuth() {
     }
   };
 
-  return { login, logout, isPending, error };
+  return { login, register, logout, isPending, error, setError };
 }

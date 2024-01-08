@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuth from "../../hooks/useAuth";
@@ -90,10 +91,13 @@ export default function LoginForm() {
             )}
           </CardContent>
 
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex flex-col items-start">
             <Button className="w-full" type="submit" disabled={isPending}>
               {isPending ? "Logging in..." : "Login"}
             </Button>
+            <Link to="/register" className="mt-3">
+              Create account
+            </Link>
           </CardFooter>
         </Card>
       </form>
