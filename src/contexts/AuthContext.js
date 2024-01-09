@@ -5,13 +5,10 @@ export const AuthContext = createContext();
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { userData: action.payload };
+      return { isAuthReady: true, userData: action.payload };
 
     case "LOGOUT":
-      return { userData: null };
-
-    case "IS_AUTH_READY":
-      return { userData: action.payload, isAuthReady: true };
+      return { isAuthReady: true, userData: null };
 
     default:
       return state;
@@ -30,9 +27,9 @@ export const AuthContextProvider = ({ children }) => {
     const userData = JSON.parse(localStorage.getItem("IPANGRAM_USER"));
 
     if (userData) {
-      dispatch({ type: "IS_AUTH_READY", payload: userData });
+      dispatch({ type: "LOGIN", payload: userData });
     } else {
-      dispatch({ type: "IS_AUTH_READY", payload: null });
+      dispatch({ type: "LOGOUT", payload: null });
     }
   }, []);
 
