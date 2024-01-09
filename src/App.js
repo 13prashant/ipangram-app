@@ -14,20 +14,22 @@ export default function App() {
 
   return (
     isAuthReady && (
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/departments" element={<Departments />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/" element={<Home />} />
-          </Route>
+      <main>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<PrivateRoutes />}>
+              <Route path="/departments" element={<Departments />} />
+              <Route path="/employees" element={<Employees />} />
+              <Route path="/" element={<Home />} />
+            </Route>
 
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </main>
     )
   );
 }

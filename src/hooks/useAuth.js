@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuthContext from "./useAuthContext";
 import { backendApiUrl } from "../lib/constants";
 
 export default function useAuth() {
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
@@ -29,6 +32,8 @@ export default function useAuth() {
         localStorage.setItem("IPANGRAM_USER", JSON.stringify(json.data));
 
         dispatch({ type: "LOGIN", payload: json.data });
+
+        navigate("/");
       }
 
       setIsPending(false);
@@ -59,6 +64,8 @@ export default function useAuth() {
         localStorage.setItem("IPANGRAM_USER", JSON.stringify(json.data));
 
         dispatch({ type: "LOGIN", payload: json.data });
+
+        navigate("/");
       }
     } catch (error) {
       console.error("Error while registering: ", error);
@@ -85,6 +92,8 @@ export default function useAuth() {
           dispatch({ type: "LOGOUT" });
 
           localStorage.setItem("IPANGRAM_USER", null);
+
+          navigate("/login");
         } else {
           setError(json.error);
         }

@@ -9,7 +9,7 @@ export default function Employees() {
   let [searchParams] = useSearchParams();
 
   const currentPage = searchParams.get("page") || 1;
-  const limit = searchParams.get("limit") || 1;
+  const limit = searchParams.get("limit") || 10;
 
   const { response } = useApi(
     `/users?role=employee&page=${currentPage}&limit=${limit}`
