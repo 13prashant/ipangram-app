@@ -53,7 +53,7 @@ export default function DepartmentForm({
         className="flex flex-col gap-4"
       >
         <DialogHeader>
-          <DialogTitle>Create department</DialogTitle>
+          <DialogTitle>{isUpdate ? "Update" : "Create"} department</DialogTitle>
         </DialogHeader>
 
         <FormField
