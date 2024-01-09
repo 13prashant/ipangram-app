@@ -29,6 +29,9 @@ export default function Home() {
               <p>
                 Email: <strong>{user.email}</strong>
               </p>
+              <p className="capitalize">
+                Role: <strong>{user.role}</strong>
+              </p>
             </CardContent>
           </Card>
         </div>

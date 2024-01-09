@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { menuItems } from "./helpers";
 
 export default function Header() {
-  const { toast } = useToast;
+  const { toast } = useToast();
 
   const { logout, isPending, error } = useAuth();
 

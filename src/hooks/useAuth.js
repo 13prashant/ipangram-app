@@ -60,11 +60,11 @@ export default function useAuth() {
 
         dispatch({ type: "LOGIN", payload: json.data });
       }
-
-      setIsPending(false);
     } catch (error) {
       console.error("Error while registering: ", error);
       setError(error.message);
+    } finally {
+      setIsPending(false);
     }
   };
 
