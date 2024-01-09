@@ -44,31 +44,39 @@ export default function Departments() {
           <div className="flex gap-5">
             {response.data.map((department) => (
               <div key={department.id} className="cursor-pointer">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="flex gap-5">
-                      <div className="border border-gray-400 rounded-md max-w-96 p-5">
-                        <h4 className="font-bold text-xl">{department.name}</h4>
-                        <p className="text-gray-400">
-                          {department?.description}
-                        </p>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DepartmentForm
-                      id={department.id}
-                      name={department.name}
-                      description={department?.description}
-                      isUpdate
-                    />
-                  </DialogContent>
-                </Dialog>
+                {isManager ? (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      {getDepartmentCard(department)}
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DepartmentForm
+                        id={department.id}
+                        name={department.name}
+                        description={department?.description}
+                        isUpdate
+                      />
+                    </DialogContent>
+                  </Dialog>
+                ) : (
+                  getDepartmentCard(department)
+                )}
               </div>
             ))}
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+function getDepartmentCard(department) {
+  return (
+    <div className="flex gap-5">
+      <div className="border border-gray-400 rounded-md max-w-96 p-5">
+        <h4 className="font-bold text-xl">{department.name}</h4>
+        <p className="text-gray-400">{department?.description}</p>
+      </div>
+    </div>
   );
 }
